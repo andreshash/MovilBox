@@ -8,7 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.mobi.movilbox.movilbox.Models.User;
+import com.mobi.movilbox.movilbox.Networking.HttpService;
+import com.mobi.movilbox.movilbox.Networking.Service;
 import com.mobi.movilbox.movilbox.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Interfaz de login
@@ -35,7 +42,6 @@ public class LoginFragment extends Fragment {
         user = (EditText) view.findViewById(R.id.user);
         password = (EditText) view.findViewById(R.id.password);
         Button login = (Button) view.findViewById(R.id.login);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +55,26 @@ public class LoginFragment extends Fragment {
      */
     public void login() {
         if(validateFields()){
-            //TODO crear una conexión
+            final Service restService = new Service();
+            final HttpService httpService =
+                    restService.createService(HttpService.class, "");
+
+            Call<User> call = httpService.login(
+                    new User(user.getText().toString(),
+                             password.getText().toString())
+            );
+
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call,
+                                       Response<User> response) {
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
         }
     }
 

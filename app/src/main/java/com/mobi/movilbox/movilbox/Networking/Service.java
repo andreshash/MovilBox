@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Service {
 
-    public static final String BASE_URL = "127.0.0.1";
+    public static final String BASE_URL = "http://localhost:8491/";
     public Retrofit retrofit;
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);

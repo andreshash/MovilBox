@@ -1,11 +1,12 @@
 package com.mobi.movilbox.movilbox.Networking;
 
+import com.mobi.movilbox.movilbox.Models.User;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 
 /**
@@ -13,10 +14,8 @@ import retrofit2.http.Query;
  */
 public interface HttpService {
 
-    @GET("report/redeemed_item/{user}")
-    Call<ArrayList<Void>> getPrizes(
-            @Path("user") String userId,
-            @Query("password") String organization
+    @POST("login")
+    Call<User> login (
+            @Body User data
     );
-
 }
