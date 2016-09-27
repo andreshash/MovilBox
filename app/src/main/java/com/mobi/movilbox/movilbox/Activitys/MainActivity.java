@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         onCreateInitialization(savedInstanceState);
     }
 
-
     /**
      * Función que contiene los componentes iniciales de la actividad
      *

@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Service {
 
-    public static final String BASE_URL = "http://localhost:8491/";
+    public static final String BASE_URL = "http://igo-rest.herokuapp.com/";
     public Retrofit retrofit;
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -42,8 +42,7 @@ public class Service {
 
                     Request original = chain.request();
                     Request.Builder requestBuilder = original.newBuilder()
-                            .method(original.method(), original.body())
-                            .addHeader("Authorization", "Bearer " + token);
+                            .method(original.method(), original.body());
                     Request request = requestBuilder.build();
                     return chain.proceed(request);
                 }

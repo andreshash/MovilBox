@@ -14,25 +14,7 @@ import android.view.View;
 public class Helpers {
 
 
-    /**
-     * Realiza reemplazos de Fragment en un Layout
-     *
-     * @param context:  Contexto de la actividad actual
-     * @param layoutId: Layout en donde se ubicará el fragment
-     * @param fragment: Fragmento que se ubicará en el layout
-     * @param tag:      TAG del Fragment
-     */
-    public static void replaceFragment(
-            Activity context,
-            int layoutId,
-            Fragment fragment,
-            String tag) {
 
-        FragmentTransaction transaction = context.getFragmentManager()
-                .beginTransaction();
-        transaction.replace(layoutId, fragment, tag);
-        transaction.commit();
-    }
 
     /**
      * Genera un SnackBar sencillo y lo muestra al usuario.

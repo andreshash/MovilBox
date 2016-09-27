@@ -1,7 +1,10 @@
 package com.mobi.movilbox.movilbox.Activitys;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import com.mobi.movilbox.movilbox.Networking.HttpService;
 import com.mobi.movilbox.movilbox.Networking.Service;
 import com.mobi.movilbox.movilbox.R;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +28,7 @@ public class LoginFragment extends Fragment {
     View view;
     EditText user;
     EditText password;
+    SweetAlertDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +48,11 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+                dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                dialog.setTitleText("Loading");
+                dialog.setCancelable(false);
+                dialog.show();
                 login();
             }
         });
@@ -55,22 +65,34 @@ public class LoginFragment extends Fragment {
         if(validateFields()){
             final Service restService = new Service();
             final HttpService httpService =
-                    restService.createService(HttpService.class, "");
+                    restService.createService(HttpService.class, "token");
 
-            Call<User> call = httpService.login(
+            Call<Void> call = httpService.login(
                     new User(user.getText().toString(),
                              password.getText().toString())
             );
 
-            call.enqueue(new Callback<User>() {
+            call.enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<User> call,
-                                       Response<User> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Log.e("login", "test" );
+                        if (dialog!=null)
+                            dialog.dismissWithAnimation();
+                        startActivity(new Intent(getActivity(), MainActivity.class));
+                    }
+                    else{
+                        dialog.dismissWithAnimation();
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Error...")
+                                .setContentText("Algo pasa  con los datos suministrados...")
+                                .show();
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
-
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e("login", "" +t);
                 }
             });
         }

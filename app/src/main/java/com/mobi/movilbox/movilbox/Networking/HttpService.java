@@ -2,7 +2,6 @@ package com.mobi.movilbox.movilbox.Networking;
 
 import com.mobi.movilbox.movilbox.Models.User;
 
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,8 +13,8 @@ import retrofit2.http.POST;
  */
 public interface HttpService {
 
-    @POST("login")
-    Call<User> login (
+    @POST("/login")
+    Call<Void> login (
             @Body User data
     );
 }
