@@ -59,7 +59,7 @@ public class LoginFragment extends Fragment {
     }
 
     /**
-     * Se encarga de realizar login contra el servidor
+     * Se encarga de realizar logue contra el servidor
      */
     public void login() {
         if(validateFields()){
@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment {
                         Log.e("login", "test" );
                         if (dialog!=null)
                             dialog.dismissWithAnimation();
-                        startActivity(new Intent(getActivity(), MainActivity.class));
+                        startActivity(new Intent(getActivity(), MapsActivity.class));
                     }
                     else{
                         dialog.dismissWithAnimation();
