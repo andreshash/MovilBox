@@ -21,11 +21,9 @@ import retrofit2.Response;
  * Interfaz de login
  */
 public class LoginFragment extends Fragment {
-    public static final String TAG = LoginFragment.class.getSimpleName();
     View view;
     EditText user;
     EditText password;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
