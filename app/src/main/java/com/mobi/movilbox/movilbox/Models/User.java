@@ -1,7 +1,7 @@
 package com.mobi.movilbox.movilbox.Models;
 
 /**
- * usuario
+ * datos del usuario
  */
 public class User {
     String email;

@@ -13,9 +13,6 @@ import android.view.View;
  */
 public class Helpers {
 
-
-
-
     /**
      * Genera un SnackBar sencillo y lo muestra al usuario.
      *
